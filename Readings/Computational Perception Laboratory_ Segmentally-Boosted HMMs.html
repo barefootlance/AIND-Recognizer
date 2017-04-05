@@ -1,0 +1,460 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<!-- saved from url=(0044)http://www.cc.gatech.edu/cpl/projects/sbhmm/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Computational Perception Laboratory: Segmentally-Boosted HMMs</title>
+<link rel="stylesheet" type="text/css" href="chrome-extension://pkehgijcmpdhfbdbbnkijodmdjhbjlgp/skin/socialwidgets.css"></head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#551A8B" alink="#FF0000">
+<a href="http://www.cc.gatech.edu/cpl/"><img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sbhmm_banner.gif" width="511" height="120"></a>&nbsp;
+
+
+<h3><font face="Tahoma">People</font></h3>
+
+<ul>
+<li>
+<font face="Tahoma">
+<a href="http://www.cc.gatech.edu/~pyin">Pei Yin</a> (primary contact)</font></li>
+<li>
+<font face="Tahoma">
+Prof.
+<a href="http://www.cc.gatech.edu/~irfan">Irfan Essa</a>,</font></li>
+<li>
+<font face="Tahoma">Prof. <a href="http://www.cc.gatech.edu/~thad">Thad Starner</a>, 
+and</font></li>
+
+<li>
+<font face="Tahoma">
+Prof.
+<a href="http://www.cc.gatech.edu/~rehg">James M. Rehg</a></font></li>
+
+</ul>
+
+<h3><font face="Tahoma">Goal</font></h3>
+<p class="MsoNormal" style="text-align: justify"><font face="Tahoma">
+Discriminative feature selection for hidden Markov Models in <font color="FF0000">sequence 
+classification</font>.</font></p>
+
+<h3><font face="Tahoma">Introduction</font></h3>
+<p class="MsoNormal" style="text-align:justify"><font face="Tahoma">Speech 
+recognition, gesture recognition, DNA analysis and many other pattern 
+recognition tasks for time-series data are sequence classification problems, 
+which predict of a <font color="FF0000">single</font> label for an entire sequence. The most successful 
+technique for sequence classification is the hidden Markov Model (HMM). The 
+recognition accuracy and efficiency of HMMs can be improved with discriminative 
+features. Traditional feature selection methods require the data being 
+independently and identically distributed (i.i.d.), but time sequences usually 
+contain strong temporal correlation between the adjacent observation frames. 
+Furthermore, features in time sequences may be "sometimes informative", that is, 
+discriminative only in some segments of a sequence. In this research, we propose 
+Segmentally-Boosted HMMs (SBHMMs), which is able to address the problems of both 
+temporal correlation and segmentally-informative features by assuming "piecewise 
+i.i.d." Experiments show that the SBHMMs consistently improve traditional HMM 
+recognition in American Sign Language recognition, human gait identification, 
+lip reading and speech recognition. The reduction of error ranges from 17% to 70%.
+</font></p>
+
+<p class="MsoNormal" style="text-align: justify">
+<font face="Tahoma">Conditional Random Fields [Lafferty, et.al., 2001] or 
+Tandem models [Hermansky, et.al., 2000] require a state-level labeling by human
+or forced alignment. In practice, such labeling may not be possible. For example,
+to recognize the sign brother, how
+can the human labeler precisely supervise the training for the first
+state when he does not even know the states meaning or how many
+states comprise the sign?
+Without such labeling, the
+discriminative feature selection will be limited to the level of the entire signs 
+or phonemes. In contrast, SBHMMs are truely designed for
+sequence classification, in which the sub-sequence components are 
+<font color="FF0000">unknown</font>, and our experiments show that the feature selection
+at the sub-sequence (state) level achieves superiour performance than that at the sequence level.
+</font></p>
+
+<h3 style="text-align: justify"><font face="Tahoma">Approach</font></h3>
+<ol>
+	<li>
+	<font face="Tahoma">
+	<p style="text-align: justify" class="MsoNormal">Train HMMs for input sequences 
+	(the example below is the sign "sister" in ASL).
+	</p>
+	</font>
+	<font face="Tahoma">
+		</font><table border="1" width="73%" id="table1"><tbody><tr>
+			<td width="120">
+			<p class="MsoNormal" style="text-align: justify">
+			<font face="Tahoma">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sister25.jpg" width="120" height="120"></font></p></td>
+			<td width="120">
+			<p class="MsoNormal" style="text-align: justify">
+			<font face="Tahoma">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sister35.jpg" width="120" height="120"></font></p></td>
+			<td width="120">
+			<p class="MsoNormal" style="text-align: justify">
+			<font face="Tahoma">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sister52.jpg" width="120" height="120"></font></p></td>
+			<td width="120">
+			<p class="MsoNormal" style="text-align: justify">
+			<font face="Tahoma">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sister59.jpg" width="120" height="120"></font></p></td>
+			<td width="120">
+			<p class="MsoNormal" style="text-align: justify">
+			<font face="Tahoma">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sister62.jpg" width="120" height="120"></font></p></td>
+			<td width="120">
+			<p class="MsoNormal" style="text-align: justify">
+			<font face="Tahoma">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sister73.jpg" width="120" height="120"></font></p></td>
+		</tr>
+		<tr>
+		<td colspan="6">
+		<p align="center">
+		<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/hmm.JPG" width="205" height="92"></p></td>
+		</tr>
+	</tbody></table>
+	<p class="MsoNormal" style="text-align: justify"><font face="Tahoma"><br>
+</font>
+	</p></li>
+	<li>
+	<p style="text-align: justify" class="MsoNormal"><font face="Tahoma">Label each frame automatically with its most likely state 
+	computed from the Viterbi decoding.<br>
+</font></p>
+	<table border="1" width="73%" id="table2">
+		<tbody><tr>
+			<td width="120">
+			<p class="MsoNormal" style="text-align: justify">
+			<font face="Tahoma">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sister25.jpg" width="120" height="120"></font></p></td>
+			<td width="120">
+			<p class="MsoNormal" style="text-align: justify">
+			<font face="Tahoma">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sister35.jpg" width="120" height="120"></font></p></td>
+			<td width="120">
+			<p class="MsoNormal" style="text-align: justify">
+			<font face="Tahoma">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sister52.jpg" width="120" height="120"></font></p></td>
+			<td width="120">
+			<p class="MsoNormal" style="text-align: justify">
+			<font face="Tahoma">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sister59.jpg" width="120" height="120"></font></p></td>
+			<td width="120">
+			<p class="MsoNormal" style="text-align: justify">
+			<font face="Tahoma">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sister62.jpg" width="120" height="120"></font></p></td>
+			<td width="120">
+			<p class="MsoNormal" style="text-align: justify">
+			<font face="Tahoma">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sister73.jpg" width="120" height="120"></font></p></td>
+		</tr>
+		<tr>
+		<td align="center">
+		<p class="MsoNormal"><font face="Tahoma">
+		state 1</font></p></td>
+		<td align="center">
+		<p class="MsoNormal"><font face="Tahoma">
+		state 1</font></p></td>
+		<td align="center">
+		<p class="MsoNormal"><font face="Tahoma">
+		state 1</font></p></td>
+		<td align="center">
+		<p class="MsoNormal"><font face="Tahoma">
+		state 2</font></p></td>
+		<td align="center">
+		<p class="MsoNormal"><font face="Tahoma">
+		state 2</font></p></td>
+		<td align="center">
+		<p class="MsoNormal"><font face="Tahoma">
+		state 3</font></p></td>
+		</tr>
+	</tbody></table>
+	<p class="MsoNormal" style="text-align: justify"><font face="Tahoma"><br>
+</font></p></li>
+	<li>
+	<p style="text-align: justify" class="MsoNormal"><font face="Tahoma">Train 
+	AdaBoost for this labeling.<br>
+</font></p>
+	<table border="1" width="80%" id="table3">
+		<tbody><tr>
+			<td width="280">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sisters1.JPG" width="280" height="210"></td>
+			<td width="280">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sisters2.JPG" width="280" height="210"></td>
+			<td>
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/sisters3.JPG" width="280" height="210"></td>
+		</tr>
+		<tr>
+			<td width="280" align="center">
+			<p class="MsoNormal"><font face="Tahoma">feature weights for state 1</font></p></td>
+			<td width="280" align="center">
+			<p class="MsoNormal"><font face="Tahoma">feature weights for state 2</font></p></td>
+			<td align="center">
+			<p class="MsoNormal"><font face="Tahoma">feature weights for state 3</font></p></td>
+		</tr>
+		<tr>
+		<td colspan="6">
+		<p class="MsoNormal">
+		<font face="Tahoma">AdaBoost constructs classification ensembles for 
+		each state of every HMM. The ensembles linearly combine the decision 
+		stumps over 17 input features (accelerometer readings). The weights for 
+		the combination, which tell the importance of the features, are greedily 
+		chosen to achieve high accuracy in separating one state from all the 
+		other states (in the same HMM and in different HMMs). This figure show that
+		our feature selection technique assigns more weight to the accelerometer 
+		readings number 15-17, the shoulder elevation, in state 1. This is consistant with the
+		linguistics of ASL.</font></p>
+		</td>
+		</tr>
+	</tbody></table>
+	<p class="MsoNormal"><br>
+</p></li>
+	<li>
+	<p class="MsoNormal" style="text-align: justify"><font face="Tahoma">The new 
+	feature space V is the output space of the AdaBoost ensembles.</font></p><br>
+	<table border="1" width="80%" id="table4">
+		<tbody><tr>
+		<td width="330">
+			<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/projection.bmp" width="330" height="280"></td>
+		</tr>
+		<tr>
+		<td>
+		<p class="MsoNormal">
+		<font face="Tahoma"> In real world applications, the dimension of V is the total number
+		of classifiers, which is also the total number of the states in all HMMs. 
+		This figure shows a much simpler example, in which we only have three classes: Red,
+		Green, and Blue. Any sample x in the original space is converted/projected to coordinate
+		(H^(Red)(x), H^(Green)(x), H^(Blue)(x)). In the ideal (separable) situation, the samples with the same
+		state label will be at the same corner in V, as shown in the figure. In the noisy (inseparable)
+		situation, the aggregation property of the margins, which is described in [Yin, et.al., 2008], 
+		still drives the samples towards the "ideal" direction. <br>
+		The new feature space is more discriminative due to the feature selection procedure, and it fits 
+		the Gaussian observation model better in our experiments. For details please see [Yin, et.al., 2008].<br>
+		In cases where there are too many states, 
+		unsupervised dimension reduction methods, such as PCA can be employed. We did not use such method
+		in computing V for the evaluation reported in [Yin, et.al., 2008].
+		</font></p>
+		</td>
+		</tr>
+	</tbody></table>
+	<p class="MsoNormal"><br>
+	</p></li>
+	<li>
+	<p class="MsoNormal" style="text-align: justify"><font face="Tahoma">Train 
+	new HMMs in V. Those HMMs have higher accuracy due to the discriminative 
+	features.</font></p></li>
+</ol>
+<h3><font face="Tahoma">
+Data
+</font></h3>
+<ul>
+	<li>
+	<h4><font face="Tahoma">Georgia Tech Speech Reading Data</font></h4>
+	</li>
+</ul>
+<p><font face="Tahoma">Description: Continuous audio-visual speech recognition 
+data, audio captured by one microphone at 16kHz and visual markers captured by 
+Motion Capture devices at 120Hz.</font></p>
+<font face="Tahoma">
+</font><table border="1" width="50%" id="table4"><tbody><tr>
+<td><font face="Tahoma">Total Length</font></td>
+<td><font face="Tahoma">30m45s</font></td>
+<td><font face="Tahoma">MoCap Rate</font></td>
+<td><font face="Tahoma">120Hz</font></td>
+</tr>
+<tr>
+<td><font face="Tahoma">Training Data</font></td>
+<td><font face="Tahoma">24m42s</font></td>
+<td><font face="Tahoma">Testing Data</font></td>
+<td><font face="Tahoma">06m03s</font></td>
+</tr>
+<tr>
+<td><font face="Tahoma">Total Sentences</font></td>
+<td><font face="Tahoma">275</font></td>
+<td><font face="Tahoma">Total Phones</font></td>
+<td><font face="Tahoma">8468</font></td>
+</tr>
+<tr>
+<td><font face="Tahoma">Total Phonemes</font></td>
+<td><font face="Tahoma">39</font></td>
+<td><font face="Tahoma">Total Samples</font></td>
+<td><font face="Tahoma">&gt; 200,000</font></td>
+</tr>
+</tbody></table><font face="Tahoma">
+<p><font face="Tahoma">
+Download:
+Compressed file (84MB): <a href="http://www.cc.gatech.edu/cpl/projects/speechreading/data/gtsr.rar">gtsr.rar</a>
+</font></p>
+<ul>
+	<li>
+	<h4><font face="Tahoma">Georgia Tech Gait Recognition Data</font></h4>
+	</li>
+</ul>
+<p><font face="Tahoma">Description: Gait identification data captured by Motion 
+Capture (MoCap) devices at 120Hz.</font></p>
+<p><font face="Tahoma">It contains 22 tracker readings for 15 subjects. We
+used three leg-related readings of the first five subjects following the convention in 
+[Kim and Pavlovic, 2006]</font></p>
+<p><font face="Tahoma">Download:
+<a href="ftp://ftp.cc.gatech.edu/pub/gvu/cpl/walkers/speed_control_data/">link</a> 
+(via FTP)</font></p>
+<ul>
+	<li>
+	<h4><font face="Tahoma">MIT American Sign Language Recognition Data</font></h4>
+	</li>
+</ul>
+<p><font face="Tahoma">Description: Continuous ASL data captured by video 
+cameras mounted on the hat.</font></p>
+<p><font face="Tahoma">It contains 500 five-sign sentences composed 
+of 40 different signs by one subject.</font></p>
+<p><font face="Tahoma">Download:
+<a href="http://wiki.cc.gatech.edu/ccg/_media/prj/pei/starner97.zip">
+starner97.zip</a> from <a href="http://wiki.cc.gatech.edu/ccg/projects/asl/asl">
+Contextual Computing Group</a> (CCG) at Georgia Tech</font></p>
+<ul>
+	<li>
+	<h4><font face="Tahoma">Georgia Tech American Sign Language Recognition Data</font></h4>
+	</li>
+</ul>
+<p><font face="Tahoma">Description: Continuous ASL data captured by 
+accelerometers on the gloves</font></p>
+<p><font face="Tahoma">
+It contains 665 four-sign sentences composed of 141 different signs by one subject.
+</font></p>
+<p><font face="Tahoma">Download:
+<a href="http://wiki.cc.gatech.edu/ccg/_media/prj/pei/acceleglove.zip">
+acceleglove.zip</a> from
+<a href="http://wiki.cc.gatech.edu/ccg/projects/asl/asl">Contextual Computing 
+Group</a> (CCG) at Georgia Tech.</font></p>
+<h3 style="text-align: justify"><font face="Tahoma">Experimental Results</font></h3>
+
+<ul>
+	<li>
+	<h4 style="text-align:justify"><font face="Tahoma">American Sign Language 
+	Recognition on MIT data and Georgia Tech data</font></h4></li>
+</ul>
+<p class="MsoNormal" style="text-align:justify">
+<img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/signlanguage.JPG" width="414" height="237"></p>
+<p class="MsoNormal" style="text-align: justify"><font face="Tahoma">V: 
+vision-based MIT data, A: accelerometer-based Georgia Tech data, and G: using
+grammar for postprocessing.</font></p><font face="Tahoma">
+
+<ul>
+	<li>
+	<h4><font face="Tahoma">Georgia Tech Gait Recognition data</font></h4></li>
+</ul>
+<p><img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/gaitrec.JPG" width="451" height="293"></p>
+<p><font face="Tahoma">The performance for DTW, HMM, BML, MixedCML, BoostedML 
+are directly from [Kim and Pavlovic, 2006]. BHMM is boosted HMM in [Yin, et.al., 
+2004]. Please refer to these two papers for the details of the data and the 
+experiments conducted.</font></p>
+<ul>
+	<li>
+	<h4><font face="Tahoma">Georgia Tech Audio-Visual Speech Recognition Data</font></h4>
+	</li>
+</ul>
+<p><img border="0" src="./Computational Perception Laboratory_ Segmentally-Boosted HMMs_files/speechrec.JPG" width="580" height="377"></p>
+<p class="MsoNormal" style="text-align: justify"><font face="Tahoma">In this 
+chart, we report the testing error for phoneme recognition. We only use audio 
+information in speech recognition and visual information in lip reading. Note 
+that audio-visual fusion may further reduce the recognition error as in [Yin, 
+et.al., 2003]. For the details of the data and the experiments conducted, please 
+refer to [Yin, et.al., 2004] and [Yin, et.al., 2008].</font></p>
+<h3>
+<font face="Tahoma">
+Publications</font></h3>
+<p class="MsoNormal" style="text-align:justify"><font face="Tahoma">Pei Yin, 
+Irfan Essa, Thad Starner, James M. Rehg, "Discriminative Feature Selection for 
+Hidden Markov Models Using Segmental Boosting", in Proc. of IEEE International 
+Conference on Acoustics, Speech, and Signal Processing (ICASSP 2008), Mar. 2008. 
+(<a href="http://www.cc.gatech.edu/~pyin/pdf/SBHMMICASSP08.pdf">pdf</a>) (<a href="http://www.cc.gatech.edu/~pyin/bibtex/yin08icassp.bib">bibtex</a>).</font></p>
+<p class="MsoNormal" style="text-align:justify"><font face="Tahoma">Pei Yin, 
+Irfan Essa, James M. Rehg, "Segmental Boosting Algorithm for Time-series 
+Analysis," in Snowbird Machine Learning Workshop, Mar. 2007.</font></p>
+<p class="MsoNormal" style="text-align:justify"><font face="Tahoma">
+<span style="layout-grid-mode: line">Pei Yin, Irfan Essa, James M. Rehg,   
+      "Asymmetrically Boosted HMM for Speech Reading,"  in Proc. of <i>IEEE 
+      Conference on Computer Vision and Pattern Recognition (CVPR 2004)</i>, pp 
+II755-761, June 2004 
+    (<a href="http://www.cc.gatech.edu/~pyin/pdf/aBHMMsr-Final.pdf">pdf</a>) (<a href="http://www.cc.gatech.edu/~pyin/bibtex/yin04cvpr.bib">bibtex</a>)</span></font></p>
+
+
+<p class="MsoNormal" style="text-align:justify"><font face="Tahoma">
+<span style="layout-grid-mode: line">Pei Yin, Irfan Essa, James M. Rehg,   
+      "Boosted Audio-Visual HMM for Speech Reading," in Proc. of <i>IEEE   
+      International Workshop on Analysis and Modeling of Faces and Gestures (AMFG)</i>, 
+    pp 68-73, Oct. 2003/held in conjunction with <i>ICCV-2003</i>. 
+    A version of this paper also appears in Proc. of <i>Asilomar Conference on 
+    Signals, Systems, and Computers</i>, pp 2013-2018, Nov. 2003 as an invited paper. 
+    (<a href="http://www.cc.gatech.edu/~pyin/pdf/BAVHMM.pdf">pdf</a>) 
+    (<a href="http://www.cc.gatech.edu/~pyin/bibtex/yin03amfg.bib">bibtex</a>)</span></font></p>
+
+
+<h3><font face="Tahoma">Acknowledgements</font></h3>
+
+<ul>
+
+<font face="Tahoma">
+We would like to thank Professor Biing-Hwang (Fred) Juang for his guidance with some of the acoustic processing parts
+of this research, Professor Aaron Bobick, Jianxin Wu, Qiang Fu, Matthew Mullin, 
+Zhenhao Zhou, Yifan Shi, Jie Sun and Fabien Robert for the discussions, and our subjects for volunteering their time. This project is partly funded by 
+<a href="http://www.nsf.gov/">National Science Foundation</a> ITR grant #IIS-0205507 
+and IIS#0511900.</font>
+</ul>
+
+<h3><font face="Tahoma">Code Download</font></h3>
+<font face="Tahoma">
+<p>Integrated with <a href="http://htk.eng.cam.ac.uk/">HTK</a></p>
+<p>(coming soon)</p>
+</font>
+
+<center><table border="0" cellspacing="0" cellpadding="0" width="600" height="125" valign="center">
+<tbody><tr>
+<td align="CENTER">
+<p align="center">
+<br>&nbsp;
+<table border="" cellspacing="0" cellpadding="4" width="540" bgcolor="#A0A0A0">
+<tbody><tr>
+<td valign="CENTER" width="11%">
+<p align="center"><b><font size="-2"><a href="http://www.cc.gatech.edu/cpl/">Home</a></font></b></p>
+</td>
+
+<td valign="CENTER" width="13%">
+<p align="center"><b><font size="-2"><a href="http://www.cc.gatech.edu/cpl/projects/">Projects</a></font></b></p>
+</td>
+
+<td valign="CENTER" width="13%">
+<p align="center"><b><font size="-2"><a href="http://www.cc.gatech.edu/cpl/pubs/">Publications</a></font></b></p>
+</td>
+
+<td valign="CENTER" width="13%">
+<p align="center"><b><font size="-2"><a href="http://www.cc.gatech.edu/cpl/people">People</a></font></b></p>
+</td>
+
+<td valign="CENTER" width="13%">
+<p align="center"><b><font size="-2"><a href="http://www.cc.gatech.edu/cpl/courses">Courses</a></font></b></p>
+</td>
+
+<td valign="CENTER" width="13%">
+<p align="center"><b><font size="-2"><a href="http://www.cc.gatech.edu/cpl/sponsors">Sponsors</a></font></b></p>
+</td>
+
+<td valign="CENTER" width="13%">
+<p align="center"><b><font size="-2"><a href="http://pbl.cc.gatech.edu:8080/cpl.1">Co-Web</a></font></b>
+<br><b><font size="-2"><a href="http://pbl.cc.gatech.edu:8080/cpl.1">CPL
+Swiki</a></font></b></p>
+</td>
+
+<td valign="CENTER" width="11%">
+<p align="center"><b><font size="-2"><a href="http://www.cc.gatech.edu/gvu">GVU</a></font></b></p>
+</td>
+</tr>
+</tbody></table>
+</p>
+
+<p align="center"><b><font size="-1">Copyright
+© 1997-2008</font></b></p></td>
+</tr>
+</tbody></table></center>
+
+
+
+<p align="center"><font face="Tahoma" size="1">Last Updated Apr. 7, 2008.</font>
+
+
+</p></font></font></body></html>
